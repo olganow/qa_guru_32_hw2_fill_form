@@ -60,7 +60,6 @@ public class DemoqaTest {
         $("#subjectsInput").setValue(subjectOne).pressEnter();
         $("#subjectsInput").setValue(subjectSecond).scrollTo().pressEnter();
         $("#hobbiesWrapper").$(byText(hobby)).click();
-        //  $("#uploadPicture").uploadFile(file);
         $("#uploadPicture").uploadFromClasspath(picture);
         $("#currentAddress").scrollIntoView(true).setValue(address);
         $("#react-select-3-input").setValue(state).pressEnter();
