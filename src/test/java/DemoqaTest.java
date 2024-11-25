@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class Demoqa_test {
+public class DemoqaTest {
 
     private String firstNameUser = "Firstname",
             lastNameUser = "Secondname",
@@ -30,7 +30,7 @@ public class Demoqa_test {
 
     private File file = new File("src/test/resources/" + picture);
 
-    public final static String URL = "https://demoqa.com/automation-practice-form",
+    public final static String AUTOMATION_PRACTICE_FORM_URL = "/automation-practice-form",
             REGISTRATION_FORM = "Student Registration Form",
             THANKS_SUBMITTING_FORM = "Thanks for submitting the form";
 
@@ -38,11 +38,14 @@ public class Demoqa_test {
     @BeforeAll
     static void setUp() {
         Configuration.pageLoadStrategy = "eager";
+        Configuration.baseUrl = "https://demoqa.com";
     }
 
     @BeforeEach
     void beforeEach() {
-        open(URL);
+        open(AUTOMATION_PRACTICE_FORM_URL);
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
     }
 
     @Test
@@ -61,7 +64,8 @@ public class Demoqa_test {
         $("#subjectsInput").setValue(subjectOne).pressEnter();
         $("#subjectsInput").setValue(subjectSecond).scrollTo().pressEnter();
         $("#hobbiesWrapper").$(byText(hobby)).click();
-        $("#uploadPicture").uploadFile(file);
+      //  $("#uploadPicture").uploadFile(file);
+        $("#uploadPicture").uploadFromClasspath(picture);
         $("#currentAddress").scrollIntoView(true).setValue(address);
         $("#react-select-3-input").setValue(state).pressEnter();
         $("#react-select-4-input").setValue(city).pressEnter();
