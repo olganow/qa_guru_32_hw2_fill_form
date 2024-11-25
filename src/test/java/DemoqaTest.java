@@ -36,20 +36,16 @@ public class DemoqaTest {
 
 
     @BeforeAll
-    static void setUp() {
-        Configuration.pageLoadStrategy = "eager";
+    static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-    }
-
-    @BeforeEach
-    void beforeEach() {
-        open(AUTOMATION_PRACTICE_FORM_URL);
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
+        Configuration.pageLoadStrategy = "eager";
     }
 
     @Test
     void successfulSubmitFormTest() {
+        open(AUTOMATION_PRACTICE_FORM_URL);
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $(".practice-form-wrapper").shouldHave(text(REGISTRATION_FORM));
         $("#firstName").setValue(firstNameUser);
         $("#lastName").setValue(lastNameUser);
@@ -64,7 +60,7 @@ public class DemoqaTest {
         $("#subjectsInput").setValue(subjectOne).pressEnter();
         $("#subjectsInput").setValue(subjectSecond).scrollTo().pressEnter();
         $("#hobbiesWrapper").$(byText(hobby)).click();
-      //  $("#uploadPicture").uploadFile(file);
+        //  $("#uploadPicture").uploadFile(file);
         $("#uploadPicture").uploadFromClasspath(picture);
         $("#currentAddress").scrollIntoView(true).setValue(address);
         $("#react-select-3-input").setValue(state).pressEnter();
